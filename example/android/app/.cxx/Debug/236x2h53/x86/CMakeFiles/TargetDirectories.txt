@@ -1,0 +1,2 @@
+/Users/ravi/Desktop/zo_screenshot/example/android/app/.cxx/Debug/236x2h53/x86/CMakeFiles/edit_cache.dir
+/Users/ravi/Desktop/zo_screenshot/example/android/app/.cxx/Debug/236x2h53/x86/CMakeFiles/rebuild_cache.dir
