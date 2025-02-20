@@ -23,15 +23,16 @@ abstract class ZoScreenshotPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
-
   void enableScreenshot() {
     throw UnimplementedError('enableScreenshot() has not been implemented.');
   }
 
   void disableScreenShot() {
     throw UnimplementedError('enableScreenshot() has not been implemented.');
+  }
+
+  void startScreenshotListner({required Function screenShotcallback}) {
+    throw UnimplementedError(
+        'startScreenshotListner() has not been implemented.');
   }
 }

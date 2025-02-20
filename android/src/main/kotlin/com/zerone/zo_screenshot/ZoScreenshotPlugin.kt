@@ -1,6 +1,11 @@
 package com.zerone.zo_screenshot
 
 import android.app.Activity
+import android.database.ContentObserver
+import android.os.Handler
+import android.os.Looper
+import android.provider.MediaStore
+import android.util.Log
 import android.view.WindowManager
 import androidx.annotation.NonNull
 
@@ -31,9 +36,7 @@ class ZoScreenshotPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
 
     when(call.method){
-      "getPlatformVersion" -> {
-        result.success("Android ${android.os.Build.VERSION.RELEASE}")
-      }
+
 
       "enableScreenshot" -> {
         enableScreenShot(result)
@@ -41,6 +44,10 @@ class ZoScreenshotPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
       "disableScreenShot" -> {
         disableScreenShot(result)
+      }
+
+      "startListening" -> {
+          startScreenshotListener()
       }
 
 
@@ -89,4 +96,22 @@ class ZoScreenshotPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   override fun onDetachedFromActivity() {
     activity = null
   }
+
+    private fun startScreenshotListener() {
+        val observer = object : ContentObserver(Handler(Looper.getMainLooper())) {
+            override fun onChange(selfChange: Boolean) {
+                Log.d("Screenshot", "Screenshot detected!")
+                try{
+                activity?.runOnUiThread {
+                    channel
+                        .invokeMethod("onScreenshotTaken", null)
+                }}
+                catch (e : Exception){
+                    Log.d("Screenshot", e.message!!)
+                }
+
+            }
+        }
+       activity?.contentResolver?.registerContentObserver(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, true, observer)
+    }
 }

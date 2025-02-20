@@ -10,13 +10,6 @@ class MethodChannelZoScreenshot extends ZoScreenshotPlatform {
   final methodChannel = const MethodChannel('zo_screenshot');
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version =
-        await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
-  }
-
-  @override
   void enableScreenshot() async {
     // TODO: implement enableScreenshot
 
@@ -27,5 +20,18 @@ class MethodChannelZoScreenshot extends ZoScreenshotPlatform {
   void disableScreenShot() {
     // TODO: implement disableScreenShot
     methodChannel.invokeMethod('disableScreenShot');
+  }
+
+  @override
+  void startScreenshotListner({required Function screenShotcallback}) {
+    // TODO: implement startScreenshotListner
+
+    methodChannel.invokeMethod('startListening');
+
+    methodChannel.setMethodCallHandler((call) async {
+      if (call.method == 'onScreenshotTaken') {
+        screenShotcallback();
+      }
+    });
   }
 }
