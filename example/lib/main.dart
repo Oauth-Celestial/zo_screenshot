@@ -20,22 +20,18 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
 
     _zoScreenshotPlugin.startScreenshotListner(screenShotcallback: () {
       print("Screenshot taken");
     });
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
+  void enableScreenshot() {
+    _zoScreenshotPlugin.enableScreenshot();
+  }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
+  void disableScreenShot() {
+    _zoScreenshotPlugin.disableScreenShot();
   }
 
   @override
@@ -67,7 +63,7 @@ class _MyAppState extends State<MyApp> {
             ),
             InkWell(
               onTap: () {
-                _zoScreenshotPlugin.disableScreenShot();
+                disableScreenShot();
               },
               child: Container(
                 child: Padding(
