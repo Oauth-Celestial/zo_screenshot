@@ -1,3 +1,4 @@
+export 'zo_screenshot_wrapper.dart';
 import 'zo_screenshot_platform_interface.dart';
 
 class ZoScreenshot {

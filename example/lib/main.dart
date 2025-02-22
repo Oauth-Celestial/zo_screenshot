@@ -37,42 +37,56 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
+      home: ZoScreenShotWrapper(
+        backgroundPreviewWidget: Container(
+          color: Colors.yellow,
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(Icons.wifi, size: 50, color: Colors.red),
+            ],
+          ),
         ),
-        body: Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              height: 10,
-            ),
-            InkWell(
-              onTap: () {
-                _zoScreenshotPlugin.enableScreenshot();
-              },
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("enableScreenshot"),
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Plugin example app'),
+          ),
+          body: Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: 10,
+              ),
+              InkWell(
+                onTap: () {
+                  _zoScreenshotPlugin.enableScreenshot();
+                },
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("enableScreenshot"),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            InkWell(
-              onTap: () {
-                disableScreenShot();
-              },
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("disableScreenshot"),
-                ),
+              SizedBox(
+                height: 10,
               ),
-            )
-          ],
+              InkWell(
+                onTap: () {
+                  disableScreenShot();
+                },
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("disableScreenshot"),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
