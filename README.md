@@ -1,7 +1,7 @@
 # zo_screenshot
 
 [![pub package](https://img.shields.io/pub/v/zo_screenshot.svg)](https://pub.dev/packages/zo_screenshot)
-[![pub points](https://img.shields.io/pub/points/zo_zo_screenshot?color=2E8B57&label=pub%20points)](https://pub.dev/packages/zo_screenshot)
+[![pub points](https://img.shields.io/pub/points/zo_screenshot?color=2E8B57&label=pub%20points)](https://pub.dev/packages/zo_screenshot)
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 
 The zo_screenshot plugin helps restrict screenshots and screen recording in Flutter apps, enhancing security and privacy by preventing unauthorized screen captures.
@@ -24,6 +24,43 @@ import 'package:zo_screenshot/zo_screenshot.dart';
 ```
 
 # Usage
+
+### Wrap with ZoScreenShotWrapper
+
+```dart
+ZoScreenShotWrapper(
+  disableScreenShot: true,
+  backgroundPreviewWidget: Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors:[Colors.grey[300]!, Colors.grey],
+      ),
+    ),
+    width: double.infinity,
+    height: double.infinity,
+    child: Center(
+    child: Icon(Icons.lock, size: 50, color: Colors.white),
+    ),
+  ),
+  child: Scaffold(
+    appBar: AppBar(
+      title: const Text('Plugin example app'),
+    ),
+    body: Example(),
+  ),
+);
+
+
+
+```
+
+| Properties      | Description                                                                                                |
+| --------------- | ---------------------------------------------------------------------------------------------------------- |
+| backgroundPreviewWidget | Add Your own custom preview widget|
+| disableScreenShot  | set to `true` to disable screenshot|
+|showBackgroundPreview | set to `false` to disable background preview|
 
 ### Disabling ScreenShot
 

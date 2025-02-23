@@ -13,16 +13,43 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _zoScreenshotPlugin = ZoScreenshot();
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: ZoScreenShotWrapper(
+        disableScreenShot: true,
+        backgroundPreviewWidget: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.grey[300]!, Colors.grey]),
+          ),
+          width: double.infinity,
+          height: double.infinity,
+          child: Center(
+            child: Icon(Icons.lock, size: 50, color: Colors.white),
+          ),
+        ),
+        child: Scaffold(
+            appBar: AppBar(
+              title: const Text('Plugin example app'),
+            ),
+            body: Example()),
+      ),
+    );
+  }
+}
+
+class Example extends StatefulWidget {
+  const Example({super.key});
 
   @override
-  void initState() {
-    super.initState();
+  State<Example> createState() => _ExampleState();
+}
 
-    _zoScreenshotPlugin.startScreenshotListner(screenShotcallback: () {
-      print("Screenshot taken");
-    });
-  }
+class _ExampleState extends State<Example> {
+  final _zoScreenshotPlugin = ZoScreenshot();
 
   void enableScreenshot() {
     _zoScreenshotPlugin.enableScreenshot();
@@ -33,60 +60,58 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    _zoScreenshotPlugin.startScreenshotListner(screenShotcallback: () {
+      print("Screenshot taken");
+    });
+    super.initState();
+  }
+
+  void showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+      duration: Duration(seconds: 1),
+    ));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ZoScreenShotWrapper(
-        disableScreenShot: true,
-        backgroundPreviewWidget: Container(
-          color: Colors.yellow,
-          width: double.infinity,
-          height: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(Icons.wifi, size: 50, color: Colors.red),
-            ],
+    return Scaffold(
+      body: Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: 10,
           ),
-        ),
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Plugin example app'),
+          InkWell(
+            onTap: () {
+              _zoScreenshotPlugin.enableScreenshot();
+              showSnackBar(context, "Screenshot enabled");
+            },
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("enableScreenshot"),
+              ),
+            ),
           ),
-          body: Column(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: 10,
-              ),
-              InkWell(
-                onTap: () {
-                  _zoScreenshotPlugin.enableScreenshot();
-                },
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text("enableScreenshot"),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              InkWell(
-                onTap: () {
-                  disableScreenShot();
-                },
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text("disableScreenshot"),
-                  ),
-                ),
-              )
-            ],
+          SizedBox(
+            height: 10,
           ),
-        ),
+          InkWell(
+            onTap: () {
+              disableScreenShot();
+              showSnackBar(context, "Screenshot disabled");
+            },
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("disableScreenshot"),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

@@ -65,8 +65,7 @@ class _ZoScreenShotWrapperState extends State<ZoScreenShotWrapper>
               width: double.infinity,
               height: double.infinity,
               child: Center(
-                child: Icon(Icons.remove_red_eye_rounded,
-                    size: 50, color: Colors.white),
+                child: Icon(Icons.lock, size: 50, color: Colors.white),
               ),
             )
           ]
@@ -83,10 +82,13 @@ class _ZoScreenShotWrapperState extends State<ZoScreenShotWrapper>
       hasTakenScreenShot = false;
     } else if (state == AppLifecycleState.inactive) {
       isBackground = true;
+      print("inactive");
     } else if (state == AppLifecycleState.paused) {
       isBackground = true;
+      print("paused");
     } else if (state == AppLifecycleState.detached) {
       isBackground = true;
+      print("detached");
     }
 
     setState(() {});
