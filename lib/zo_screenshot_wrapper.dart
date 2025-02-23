@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:zo_screenshot/zo_screenshot.dart';
 
 class ZoScreenShotWrapper extends StatefulWidget {
-  Widget child;
-  Widget? backgroundPreviewWidget;
-  ZoScreenShotWrapper(
-      {super.key, required this.child, this.backgroundPreviewWidget});
+  final Widget child;
+  final Widget? backgroundPreviewWidget;
+  final bool? disableScreenShot;
+  final bool? showBackgroundPreview;
+
+  const ZoScreenShotWrapper(
+      {super.key,
+      required this.child,
+      this.backgroundPreviewWidget,
+      this.disableScreenShot,
+      this.showBackgroundPreview = true});
 
   @override
   State<ZoScreenShotWrapper> createState() => _ZoScreenShotWrapperState();
@@ -13,10 +21,21 @@ class ZoScreenShotWrapper extends StatefulWidget {
 class _ZoScreenShotWrapperState extends State<ZoScreenShotWrapper>
     with WidgetsBindingObserver {
   bool isBackground = false;
+  bool hasTakenScreenShot = false;
 
   @override
   void initState() {
-    WidgetsBinding.instance.addObserver(this);
+    if (widget.disableScreenShot ?? false) {
+      ZoScreenshot().disableScreenShot();
+    }
+    if (widget.showBackgroundPreview ?? false) {
+      WidgetsBinding.instance.addObserver(this);
+      ZoScreenshot().startScreenshotListner(screenShotcallback: () {
+        hasTakenScreenShot = true;
+        setState(() {});
+      });
+    }
+
     super.initState();
   }
 
@@ -32,7 +51,7 @@ class _ZoScreenShotWrapperState extends State<ZoScreenShotWrapper>
     return Stack(
       children: [
         widget.child,
-        if (isBackground)
+        if (isBackground && !hasTakenScreenShot)
           if (widget.backgroundPreviewWidget != null) ...[
             widget.backgroundPreviewWidget!
           ] else ...[
@@ -57,24 +76,17 @@ class _ZoScreenShotWrapperState extends State<ZoScreenShotWrapper>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // TODO: implement didChangeAppLifecycleState
     super.didChangeAppLifecycleState(state);
 
     if (state == AppLifecycleState.resumed) {
-      // app is in foreground
       isBackground = false;
-      print("In Foreground");
+      hasTakenScreenShot = false;
     } else if (state == AppLifecycleState.inactive) {
       isBackground = true;
-      print("In Background");
-      // app is in background
     } else if (state == AppLifecycleState.paused) {
       isBackground = true;
-      print("In Background");
     } else if (state == AppLifecycleState.detached) {
       isBackground = true;
-      print("In Background");
-      // app is detached
     }
 
     setState(() {});

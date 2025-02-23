@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
 import 'package:zo_screenshot/zo_screenshot.dart';
 
 void main() {
@@ -38,6 +36,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: ZoScreenShotWrapper(
+        disableScreenShot: true,
         backgroundPreviewWidget: Container(
           color: Colors.yellow,
           width: double.infinity,
