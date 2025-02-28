@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:zo_screenshot/zo_screenshot_broadcaster.dart';
 
 import 'zo_screenshot_platform_interface.dart';
 
@@ -23,14 +26,15 @@ class MethodChannelZoScreenshot extends ZoScreenshotPlatform {
   }
 
   @override
-  void startScreenshotListner({required Function screenShotcallback}) {
+  void startScreenshotListner() {
     // TODO: implement startScreenshotListner
 
     methodChannel.invokeMethod('startListening');
 
     methodChannel.setMethodCallHandler((call) async {
       if (call.method == 'onScreenshotTaken') {
-        screenShotcallback();
+        ZoScreenshotListnerBroadcaster().broadcastScreenshotTaken();
+        // screenShotcallback();
       }
     });
   }

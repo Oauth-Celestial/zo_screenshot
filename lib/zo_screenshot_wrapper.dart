@@ -32,6 +32,7 @@ class _ZoScreenShotWrapperState extends State<ZoScreenShotWrapper>
       WidgetsBinding.instance.addObserver(this);
       ZoScreenshot().startScreenshotListner(screenShotcallback: () {
         hasTakenScreenShot = true;
+        print("Listener called in wrapper");
         setState(() {});
       });
     }

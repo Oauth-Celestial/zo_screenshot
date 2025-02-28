@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:zo_screenshot/observer/zo_navigator_observer.dart';
 import 'package:zo_screenshot/zo_screenshot.dart';
+import 'package:zo_screenshot_example/test_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +18,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorObservers: [
+        ZoNavigatorObserver(
+            isClassRouteStyle: true, secureClassRouteList: [TestScreen])
+      ],
       home: ZoScreenShotWrapper(
-        disableScreenShot: true,
+        disableScreenShot: false,
+        showBackgroundPreview: true,
         backgroundPreviewWidget: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -86,8 +93,11 @@ class _ExampleState extends State<Example> {
           ),
           InkWell(
             onTap: () {
-              _zoScreenshotPlugin.enableScreenshot();
-              showSnackBar(context, "Screenshot enabled");
+              // _zoScreenshotPlugin.enableScreenshot();
+              // showSnackBar(context, "Screenshot enabled");
+
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TestScreen()));
             },
             child: Container(
               child: Padding(
