@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zo_screenshot/observer/zo_navigator_observer.dart';
+
 import 'package:zo_screenshot/zo_screenshot.dart';
-import 'package:zo_screenshot_example/test_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,13 +17,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorObservers: [
-        ZoNavigatorObserver(
-            isClassRouteStyle: true, secureClassRouteList: [TestScreen])
-      ],
       home: ZoScreenShotWrapper(
         disableScreenShot: false,
-        showBackgroundPreview: true,
         backgroundPreviewWidget: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -96,13 +90,15 @@ class _ExampleState extends State<Example> {
               // _zoScreenshotPlugin.enableScreenshot();
               // showSnackBar(context, "Screenshot enabled");
 
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => TestScreen()));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => TestScreen()));
+
+              Navigator.pushNamed(context, "/secureRoute");
             },
             child: Container(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("enableScreenshot"),
+                child: Text("Secure Route "),
               ),
             ),
           ),
@@ -111,13 +107,12 @@ class _ExampleState extends State<Example> {
           ),
           InkWell(
             onTap: () {
-              disableScreenShot();
-              showSnackBar(context, "Screenshot disabled");
+              Navigator.pushNamed(context, "/nonSecureRoute");
             },
             child: Container(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("disableScreenshot"),
+                child: Text("Non Secure Route"),
               ),
             ),
           )

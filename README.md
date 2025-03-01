@@ -25,7 +25,83 @@ import 'package:zo_screenshot/zo_screenshot.dart';
 
 # Usage
 
-### Wrap with ZoScreenShotWrapper
+### Disabling ScreenShot
+
+```dart
+final _zoScreenshotPlugin = ZoScreenshot();
+_zoScreenshotPlugin.disableScreenShot();
+```
+
+**Enabling Screenshot**
+
+```dart
+final _zoScreenshotPlugin = ZoScreenshot();
+_zoScreenshotPlugin.enableScreenshot();
+```
+
+**Listen To Screenshot Event**
+
+```dart
+final _zoScreenshotPlugin = ZoScreenshot();
+
+_zoScreenshotPlugin.startScreenshotListner(
+  screenShotcallback: () {
+    print("Screenshot taken");
+  },
+);
+```
+
+### Secure Specific Routes
+
+Financial apps like Google Pay (GPay) prevent sensitive screens from being recorded or captured. You can implement similar security measures in your app by blocking screenshots and screen recordings on specific routes. The approach depends on your navigation style—whether you're using named routes or class-based navigation.
+
+`For Named Route`
+
+```dart
+return MaterialApp(
+  navigatorObservers: [
+    ZoNavigatorObserver(
+      navigationStyle: NavigationStyle.namedRoute,
+      secureNamedRouteList: ["/secureRoute"],
+    ),
+  ],
+  routes: {
+    "/secureRoute": (context) => const SecureRoute(),
+    "/nonSecureRoute": (context) => NonSecure(),
+  },
+  home: Scaffold(
+    appBar: AppBar(
+      centerTitle: true,
+      title: const Text('Zo Screenshot Example'),
+    ),
+    body: Example(),
+  ),
+);
+```
+
+`For Class Route`
+
+```dart
+return MaterialApp(
+  navigatorObservers: [
+    ZoNavigatorObserver(
+      navigationStyle: NavigationStyle.classRoute,
+      secureClassRouteList: [SecureRoute],
+    ),
+  ],
+  home: Scaffold(
+    appBar: AppBar(
+      centerTitle: true,
+      title: const Text('Zo Screenshot Example'),
+    ),
+    body: Example(),
+  ),
+);
+```
+
+`Show Preview While App is in Background`
+
+Wrap with ZoScreenShotWrapper
 
 ```dart
 ZoScreenShotWrapper(
@@ -52,8 +128,6 @@ ZoScreenShotWrapper(
   ),
 );
 
-
-
 ```
 
 | Properties      | Description                                                                                                |
@@ -61,32 +135,6 @@ ZoScreenShotWrapper(
 | backgroundPreviewWidget | Add Your own custom preview widget|
 | disableScreenShot  | set to `true` to disable screenshot|
 |showBackgroundPreview | set to `false` to disable background preview|
-
-### Disabling ScreenShot
-
-```dart
-final _zoScreenshotPlugin = ZoScreenshot();
-_zoScreenshotPlugin.disableScreenShot();
-```
-
-**Enabling Screenshot**
-
-```dart
-final _zoScreenshotPlugin = ZoScreenshot();
-_zoScreenshotPlugin.enableScreenshot();
-```
-
-**Listen To Screenshot Event**
-
-```dart
-final _zoScreenshotPlugin = ZoScreenshot();
-
-_zoScreenshotPlugin.startScreenshotListner(
-  screenShotcallback: () {
-    print("Screenshot taken");
-  },
-);
-```
 
 Feel free to post a feature requests or report a bug [here](https://github.com/Oauth-Celestial/zo_screenshot/issues).
 

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:zo_screenshot/zo_screenshot.dart';
 
-class TestScreen extends StatefulWidget {
-  const TestScreen({super.key});
+class SecureRoute extends StatefulWidget {
+  const SecureRoute({super.key});
 
   @override
-  State<TestScreen> createState() => _TestScreenState();
+  State<SecureRoute> createState() => _SecureRouteState();
 }
 
-class _TestScreenState extends State<TestScreen> {
+class _SecureRouteState extends State<SecureRoute> {
   @override
   void initState() {
     // TODO: implement initState
@@ -23,7 +23,11 @@ class _TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.white,
+      appBar: AppBar(),
+      body: Center(
+        child: Text(" Secure Route"),
+      ),
     );
   }
 }

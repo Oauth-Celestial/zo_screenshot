@@ -2,17 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:zo_screenshot/zo_screenshot.dart';
 
+enum NavigationStyle { namedRoute, classRoute }
+
 class ZoNavigatorObserver extends NavigatorObserver {
-  bool isNamedRouteStyle;
-
-  bool isClassRouteStyle;
-
+  final NavigationStyle navigationStyle;
   List<String> secureNamedRouteList;
 
   List<Type> secureClassRouteList;
   ZoNavigatorObserver({
-    this.isNamedRouteStyle = false,
-    this.isClassRouteStyle = false,
+    required this.navigationStyle,
     this.secureNamedRouteList = const [],
     this.secureClassRouteList = const [],
   });
@@ -26,7 +24,7 @@ class ZoNavigatorObserver extends NavigatorObserver {
   }
 
   processRouteInfo(Route? currentRoute) {
-    if (isClassRouteStyle) {
+    if (navigationStyle == NavigationStyle.classRoute) {
       if (currentRoute is MaterialPageRoute) {
         final widget = currentRoute.builder(currentRoute.navigator!.context);
         if (secureClassRouteList.contains(widget.runtimeType)) {
@@ -37,7 +35,7 @@ class ZoNavigatorObserver extends NavigatorObserver {
       }
     }
 
-    if (isNamedRouteStyle) {
+    if (navigationStyle == NavigationStyle.namedRoute) {
       if (currentRoute?.settings.name != null) {
         if (secureNamedRouteList.contains(currentRoute?.settings.name)) {
           disableScreenshot();
