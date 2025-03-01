@@ -6,6 +6,25 @@
 
 The zo_screenshot plugin helps restrict screenshots and screen recording in Flutter apps, enhancing security and privacy by preventing unauthorized screen captures.
 
+## ✅ Key Features
+
+✔️ **Enable or disable screenshot capturing**  
+✔️ **Detect and stream screenshot events** in real time  
+✔️ **Secure sensitive pages** like login, payments, and chat  
+✔️ **Prevent screen recording** on protected screens  
+
+🔐 **Protect your Flutter app from unauthorized screenshots today!**
+
+### Table of contents
+
+- [Getting started](#getting-started)
+- [Usage](#usage)
+  - [Disabling ScreenShot](#disabling-screenshot)
+  - [Enabling Screenshot](#enabling-screenshot)
+  - [Listen To Screenshot Event](#listen-to-screenshot-event)
+  - [Secure Specific Routes](#secure-specific-routes)
+  - [Show Preview While App is in Background](#show-preview-while-app-is-in-background)
+
 ## Getting started
 
 First, add zo_screenshot as a dependency in your pubspec.yaml file
@@ -23,7 +42,7 @@ dependencies:
 import 'package:zo_screenshot/zo_screenshot.dart';
 ```
 
-# Usage
+## Usage
 
 ### Disabling ScreenShot
 
@@ -32,14 +51,14 @@ final _zoScreenshotPlugin = ZoScreenshot();
 _zoScreenshotPlugin.disableScreenShot();
 ```
 
-**Enabling Screenshot**
+### Enabling Screenshot
 
 ```dart
 final _zoScreenshotPlugin = ZoScreenshot();
 _zoScreenshotPlugin.enableScreenshot();
 ```
 
-**Listen To Screenshot Event**
+### Listen To Screenshot Event
 
 ```dart
 final _zoScreenshotPlugin = ZoScreenshot();
@@ -55,10 +74,7 @@ _zoScreenshotPlugin.startScreenshotListner(
 
 Financial apps like Google Pay (GPay) prevent sensitive screens from being recorded or captured. You can implement similar security measures in your app by blocking screenshots and screen recordings on specific routes. The approach depends on your navigation style—whether you're using named routes or class-based navigation.
 
-
 ![SecureRoute](https://github.com/user-attachments/assets/63546040-294a-48aa-9376-b50bbac1e3e7)
-
-
 
 `For Named Route`
 
@@ -104,7 +120,7 @@ return MaterialApp(
 );
 ```
 
-`Show Preview While App is in Background`
+### Show Preview While App is in Background
 
 ![BackgroundPreview](https://github.com/user-attachments/assets/8614c5dc-5cab-4ca4-8cd4-1f3b060e5b08)
 

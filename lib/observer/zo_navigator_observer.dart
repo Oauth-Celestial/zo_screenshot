@@ -48,15 +48,12 @@ class ZoNavigatorObserver extends NavigatorObserver {
 
   @override
   void didPush(Route route, Route? previousRoute) {
-    // TODO: implement didPush
     processRouteInfo(route);
     super.didPush(route, previousRoute);
   }
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    // TODO: implement didPop
-
     processRouteInfo(previousRoute);
 
     super.didPop(route, previousRoute);

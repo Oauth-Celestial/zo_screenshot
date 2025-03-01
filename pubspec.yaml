@@ -1,6 +1,6 @@
 name: zo_screenshot
 description: "zo_screenshot is a Flutter plugin that allows you to enable, disable, toggle, or stream screenshot events in your application."
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/Oauth-Celestial/zo_screenshot
 environment:
   sdk: ^3.6.1
