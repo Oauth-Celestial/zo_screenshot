@@ -55,6 +55,11 @@ _zoScreenshotPlugin.startScreenshotListner(
 
 Financial apps like Google Pay (GPay) prevent sensitive screens from being recorded or captured. You can implement similar security measures in your app by blocking screenshots and screen recordings on specific routes. The approach depends on your navigation style—whether you're using named routes or class-based navigation.
 
+
+![SecureRoute](https://github.com/user-attachments/assets/63546040-294a-48aa-9376-b50bbac1e3e7)
+
+
+
 `For Named Route`
 
 ```dart
@@ -100,6 +105,8 @@ return MaterialApp(
 ```
 
 `Show Preview While App is in Background`
+
+![BackgroundPreview](https://github.com/user-attachments/assets/8614c5dc-5cab-4ca4-8cd4-1f3b060e5b08)
 
 Wrap with ZoScreenShotWrapper
 
