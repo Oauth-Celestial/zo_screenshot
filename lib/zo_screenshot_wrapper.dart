@@ -83,13 +83,10 @@ class _ZoScreenShotWrapperState extends State<ZoScreenShotWrapper>
       hasTakenScreenShot = false;
     } else if (state == AppLifecycleState.inactive) {
       isBackground = true;
-      print("inactive");
     } else if (state == AppLifecycleState.paused) {
       isBackground = true;
-      print("paused");
     } else if (state == AppLifecycleState.detached) {
       isBackground = true;
-      print("detached");
     }
 
     setState(() {});
