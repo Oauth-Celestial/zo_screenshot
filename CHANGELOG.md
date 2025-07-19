@@ -1,3 +1,11 @@
+## 0.0.4
+
+* Capture widgets and share them in image format.
+
+* Updated for latest flutter support
+
+* Minor bug fixes
+
 ## 0.0.3
 
 * Added Secure Specific Route feature and bug fixes.

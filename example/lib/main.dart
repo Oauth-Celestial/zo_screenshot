@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:zo_screenshot/zo_screenshot.dart';
+import 'package:zo_screenshot_example/non_secure.dart';
+import 'package:zo_screenshot_example/secure_route.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +19,18 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        "/secureRoute": (_) => SecureRoute(),
+        "/nonSecureRoute": (_) => NonSecure()
+      },
+      navigatorObservers: [
+        ZoNavigatorObserver(
+          navigationStyle: NavigationStyle.namedRoute,
+          secureNamedRouteList: ["/secureRoute"],
+        ),
+      ],
       home: ZoScreenShotWrapper(
-        disableScreenShot: false,
+        disableScreenShot: true,
         backgroundPreviewWidget: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -51,6 +63,8 @@ class Example extends StatefulWidget {
 
 class _ExampleState extends State<Example> {
   final _zoScreenshotPlugin = ZoScreenshot();
+
+  ZoCaptureAreaController _areaController = ZoCaptureAreaController();
 
   void enableScreenshot() {
     _zoScreenshotPlugin.enableScreenshot();
@@ -95,11 +109,9 @@ class _ExampleState extends State<Example> {
 
               Navigator.pushNamed(context, "/secureRoute");
             },
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Secure Route "),
-              ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Secure Route "),
             ),
           ),
           SizedBox(
@@ -113,6 +125,24 @@ class _ExampleState extends State<Example> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text("Non Secure Route"),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ZoCaptureArea(
+            controller: _areaController,
+            child: InkWell(
+              onTap: () {
+                _areaController.captureAndShare();
+              },
+              child: Container(
+                width: 150,
+                height: 150,
+                alignment: Alignment.center,
+                color: Colors.red,
+                child: Text("Click"),
               ),
             ),
           )

@@ -4,7 +4,7 @@
 [![pub points](https://img.shields.io/pub/points/zo_screenshot?color=2E8B57&label=pub%20points)](https://pub.dev/packages/zo_screenshot)
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 
-The zo_screenshot plugin helps restrict screenshots and screen recording in Flutter apps, enhancing security and privacy by preventing unauthorized screen captures.
+Zo Screenshot is a Flutter plugin that enhances privacy by preventing screenshots and screen recording. It also lets you capture screenshots of specific widgets, making it perfect for secure apps that still need custom capture features.
 
 ## ✅ Key Features
 
@@ -12,6 +12,7 @@ The zo_screenshot plugin helps restrict screenshots and screen recording in Flut
 ✔️ **Detect and stream screenshot events** in real time  
 ✔️ **Secure sensitive pages** like login, payments, and chat  
 ✔️ **Prevent screen recording** on protected screens  
+✔️ **Capture widget and share** share you widgets in image format
 
 🔐 **Protect your Flutter app from unauthorized screenshots today!**
 
@@ -68,6 +69,30 @@ _zoScreenshotPlugin.startScreenshotListner(
     print("Screenshot taken");
   },
 );
+```
+
+### Convert Widget to shareable images
+
+```dart
+// create Capture Area Controller
+ZoCaptureAreaController _areaController = ZoCaptureAreaController();
+
+ZoCaptureArea(
+  controller: _areaController,
+  child: InkWell(
+    onTap: () {
+      _areaController.captureAndShare();
+    },
+    child: Container(
+      width: 150,
+      height: 150,
+      alignment: Alignment.center,
+      color: Colors.red,
+      child: const Text("Click"),
+    ),
+  ),
+)
+
 ```
 
 ### Secure Specific Routes

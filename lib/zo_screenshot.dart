@@ -2,6 +2,8 @@ export 'zo_screenshot_wrapper.dart';
 
 export 'observer/zo_navigator_observer.dart';
 
+export 'widget_screenshot/zo_capture_area.dart';
+
 import 'package:zo_screenshot/zo_screenshot_broadcaster.dart';
 
 import 'zo_screenshot_platform_interface.dart';

@@ -1,6 +1,6 @@
 name: zo_screenshot
-description: "Secure sensitive app screens by blocking screenshots and screen recording on specific routes."
-version: 0.0.3
+description: "A Flutter plugin to block screenshots and screen recording for privacy, while allowing secure screenshot capture of specific widgets."
+version: 0.0.4
 repository: https://github.com/Oauth-Celestial/zo_screenshot
 environment:
   sdk: ^3.6.1
