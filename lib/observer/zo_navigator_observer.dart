@@ -1,29 +1,49 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+/// Provides the [ZoNavigatorObserver] to automatically manage screenshot protection per route.
+library zo_navigator_observer;
+
 import 'package:flutter/material.dart';
 import 'package:zo_screenshot/zo_screenshot.dart';
 
-enum NavigationStyle { namedRoute, classRoute }
+/// Style of navigation routing used to determine secure screens.
+enum NavigationStyle {
+  /// Routes identified by their route name (e.g. `'/home'`).
+  namedRoute,
 
+  /// Routes identified by their runtime widget Type.
+  classRoute,
+}
+
+/// A [NavigatorObserver] that automatically enables or disables screenshot protection based on current routes.
 class ZoNavigatorObserver extends NavigatorObserver {
+  /// The navigation style used to evaluate routes.
   final NavigationStyle navigationStyle;
+
+  /// List of named route strings where screenshots should be blocked.
   List<String> secureNamedRouteList;
 
+  /// List of widget [Type]s where screenshots should be blocked.
   List<Type> secureClassRouteList;
+
+  /// Creates a [ZoNavigatorObserver] to monitor navigation changes and manage screenshot protection.
   ZoNavigatorObserver({
     required this.navigationStyle,
     this.secureNamedRouteList = const [],
     this.secureClassRouteList = const [],
   });
 
-  disableScreenshot() {
+  /// Disables screenshot capture on the platform.
+  void disableScreenshot() {
     ZoScreenshot().disableScreenShot();
   }
 
-  enableScreenshot() {
+  /// Enables screenshot capture on the platform.
+  void enableScreenshot() {
     ZoScreenshot().enableScreenshot();
   }
 
-  processRouteInfo(Route? currentRoute) {
+  /// Processes the [currentRoute] to enable or disable screenshot capture based on configuration.
+  void processRouteInfo(Route? currentRoute) {
+
     if (navigationStyle == NavigationStyle.classRoute) {
       if (currentRoute is MaterialPageRoute) {
         final widget = currentRoute.builder(currentRoute.navigator!.context);

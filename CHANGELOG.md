@@ -1,3 +1,6 @@
+## 1.0.1
+* Fixed swift version issue
+
 ## 1.0.0
 **Breaking Changes**
 * Added Swift Package Manager (SPM) support for iOS.

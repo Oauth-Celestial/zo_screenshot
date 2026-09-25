@@ -1,3 +1,6 @@
+/// Common platform interface for the zo_screenshot plugin.
+library zo_screenshot_platform_interface;
+
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'zo_screenshot_method_channel.dart';
@@ -23,16 +26,20 @@ abstract class ZoScreenshotPlatform extends PlatformInterface {
     _instance = instance;
   }
 
+  /// Enables screenshots on the platform.
   void enableScreenshot() {
     throw UnimplementedError('enableScreenshot() has not been implemented.');
   }
 
+  /// Disables screenshots on the platform.
   void disableScreenShot() {
-    throw UnimplementedError('enableScreenshot() has not been implemented.');
+    throw UnimplementedError('disableScreenShot() has not been implemented.');
   }
 
+  /// Starts listening for platform screenshot notifications.
   void startScreenshotListner() {
     throw UnimplementedError(
         'startScreenshotListner() has not been implemented.');
   }
 }
+

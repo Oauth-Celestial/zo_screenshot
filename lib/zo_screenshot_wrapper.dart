@@ -1,18 +1,35 @@
+/// Provides the [ZoScreenShotWrapper] widget for protecting UI screens against screenshots and background previews.
+library zo_screenshot_wrapper;
+
 import 'package:flutter/material.dart';
 import 'package:zo_screenshot/zo_screenshot.dart';
 
+/// A wrapper widget that provides screenshot protection and handles background privacy previews.
 class ZoScreenShotWrapper extends StatefulWidget {
+  /// The primary widget tree wrapped by this protection layer.
   final Widget child;
+
+  /// Custom widget to display when the app is in the background or app switcher.
+  ///
+  /// If `null`, a default privacy lock screen with a lock icon is displayed.
   final Widget? backgroundPreviewWidget;
+
+  /// Whether to disable screenshots on initialization.
   final bool? disableScreenShot;
+
+  /// Whether to show the background privacy preview when the app enters the background.
+  ///
+  /// Defaults to `true`.
   final bool? showBackgroundPreview;
 
+  /// Creates a [ZoScreenShotWrapper] widget.
   const ZoScreenShotWrapper(
       {super.key,
       required this.child,
       this.backgroundPreviewWidget,
       this.disableScreenShot,
       this.showBackgroundPreview = true});
+
 
   @override
   State<ZoScreenShotWrapper> createState() => _ZoScreenShotWrapperState();
