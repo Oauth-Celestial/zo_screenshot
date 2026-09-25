@@ -1,3 +1,7 @@
+## 1.0.0
+**Breaking Changes**
+* Added Swift Package Manager (SPM) support for iOS.
+
 ## 0.0.4
 
 * Capture widgets and share them in image format.
